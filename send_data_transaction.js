@@ -3,11 +3,12 @@ const { dag4 } = require('@stardust-collective/dag4');
 const jsSha256 = require('js-sha256');
 const axios = require('axios');
 
-const buildMessage = (creator, sessionId, endSnapshotOrdinal) => {
+const buildMessage = (creator, sessionId, dataId, endSnapshotOrdinal) => {
     return {
         CreateSession: {
             creator: creator,
-            id: sessionId,
+            acessId: sessionId,
+            dataId: dataId,
             endSnapshotOrdinal: endSnapshotOrdinal
         }
     };
@@ -17,6 +18,7 @@ const buildCreateSessionMessage = () => {
     return buildMessage(
         process.env.CREATOR,
         process.env.SESSION_ID,
+        process.env.DATA_ID,
         parseInt(process.env.END_SNAPSHOT_ORDINAL, 10)
     );
 };
