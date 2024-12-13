@@ -1,0 +1,28 @@
+# Node modules
+node_modules/
+
+# Environment files
+.env
+
+# Lock files
+yarn
+package-lock.json
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Git folders
+.git/
+
+# Ignore build or temporary files (if applicable)
+dist/
+build/
+temp/
+
+# Ignore specific system files
+.DS_Store
+Thumbs.db
+
