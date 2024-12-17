@@ -3,18 +3,18 @@ const { dag4 } = require('@stardust-collective/dag4');
 const jsSha256 = require('js-sha256');
 const axios = require('axios');
 
-const buildMessage = (creator, sessionId, dataId, endSnapshotOrdinal) => {
+const buildMessage = (accessProvider, sessionId, accessObj, endSnapshotOrdinal) => {
     return {
-        CreateSession: {
-            creator: creator,
-            acessId: sessionId,
-            dataId: dataId,
+        NotarizeSession: {
+            accessProvider: accessProvider,
+            accessId: sessionId,
+            accessObj: accessObj,
             endSnapshotOrdinal: endSnapshotOrdinal
         }
     };
 };
 
-const buildCreateSessionMessage = () => {
+const buildNotarizeSessionMessage = () => {
     return buildMessage(
         process.env.CREATOR,
         process.env.SESSION_ID,
@@ -63,7 +63,7 @@ const sendDataTransactionsUsingUrls = async (
         testnet: process.env.TESTNET === 'true'
     });
 
-    const message = buildCreateSessionMessage();
+    const message = buildNotarizeSessionMessage();
     const proof = await generateProof(message, walletPrivateKey, account);
     const body = {
         value: {
